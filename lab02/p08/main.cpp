@@ -28,6 +28,7 @@ int main()
                 cout.put('\'');
             }
         }
+
         else
         {
             cout.put(ch);
