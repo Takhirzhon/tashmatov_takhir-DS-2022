@@ -70,9 +70,16 @@ vector<int> createDeck()
     vector<int> r(52);
     for (int i = 0; i < 52; i++)
     {
+        --r[i];
     }
 }
 
-void applyShuffleToDeck(vector<int> &deck, const vector<int> &shuffle)
-{
-}
+// void applyShuffleToDeck(vector<int> &deck, const vector<int> &shuffle)
+// {
+//     int tVector = deck;
+
+//     for (size_t i = 0; i < (int)shuffle.size; i++)
+//     {
+//         deck = tVector[i] - shuffle[i - 1];
+//     }
+// }
