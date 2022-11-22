@@ -8,6 +8,7 @@ class BigInt
 {
     friend std::ostream &operator<<(std::ostream &out, const BigInt &x);
     friend BigInt operator+(const BigInt &x, const BigInt &y);
+    friend BigInt operator-(const BigInt &x, const BigInt &y);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -28,7 +29,7 @@ public:
         }
     }
 
-    static BigInt addAbsVaalues(const BigInt &x, const BigInt &y)
+    static BigInt addAbsValues(const BigInt &x, const BigInt &y)
     {
         auto itX = x.mDigits.rbegin();
         auto itY = y.mDigits.rbegin();
@@ -85,13 +86,17 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
 {
     if (!x.mIsNegative && !y.mIsNegative)
     {
-        return BigInt::addAbsVaalues(x, y);
-    }
-
-    if (x.mIsNegative && y.mIsNegative)
-    {
+        return BigInt::addAbsValues(x, y);
     }
 
     throw std::runtime_error("not implemented yet");
 }
--
+
+inline BigInt operator-(const BigInt &x, const BigInt &y)
+{
+    if (x.mIsNegative && y.mIsNegative)
+    {
+        return BigInt::addAbsValues(x, y);
+    }
+    throw std::runtime_error("not implemented yet");
+}
