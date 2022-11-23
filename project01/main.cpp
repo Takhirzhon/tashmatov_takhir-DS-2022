@@ -221,3 +221,95 @@ TEST_CASE("Comparison tests")
         REQUIRE_FALSE(BigInt("123456789") <= BigInt("97654321"));
     }
 }
+
+TEST_CASE("input operator")
+{
+    ostringstream sout;
+
+    SUBCASE("correct input TEST #1")
+    {
+        istringstream sinp("123x123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.good());
+        REQUIRE(x == 123);
+    }
+
+    SUBCASE("correct input TEST #2")
+    {
+        istringstream sinp("123x");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.good());
+        REQUIRE(x == 123);
+        char ch;
+        sinp >> ch;
+        REQUIRE(ch == 'x');
+    }
+
+    SUBCASE("correct input TEST #3")
+    {
+        istringstream sinp("    -123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == -123);
+    }
+    SUBCASE("correct input TEST")
+    {
+        istringstream sinp("     +123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 123);
+    }
+    SUBCASE("correct input TEST")
+    {
+        istringstream sinp("123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 123);
+    }
+
+    SUBCASE("incorrect input")
+    {
+        istringstream sinp("+ 123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.fail());
+        REQUIRE(x == 0);
+    }
+
+    SUBCASE("incorrect input #2")
+    {
+        istringstream sinp("Hello");
+        BigInt x;
+        char ch;
+        sinp >> x;
+        REQUIRE(sinp.fail());
+        REQUIRE(x == 0);
+        sinp.clear();
+        sinp >> ch;
+        REQUIRE(ch == 'h');
+    }
+
+    SUBCASE("incorrect input #3")
+    {
+        istringstream sinp("++123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.fail());
+        REQUIRE(x == 0);
+    }
+
+    SUBCASE("incorrect input #4")
+    {
+        istringstream sinp("");
+        BigInt x;
+        sinp >> x;
+        REQUIRE(sinp.fail());
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 0);
+    }
+}

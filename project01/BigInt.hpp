@@ -17,6 +17,7 @@ class BigInt
     friend bool operator>(const BigInt &x, const BigInt &y);
     friend bool operator<=(const BigInt &x, const BigInt &y);
     friend bool operator>=(const BigInt &x, const BigInt &y);
+    friend std::istream &operator>>(std::istream &inp, BigInt &x);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -180,4 +181,34 @@ inline bool operator>=(const BigInt &x, const BigInt &y)
 inline bool operator<=(const BigInt &x, const BigInt &y)
 {
     return !(x > y);
+}
+
+std::istream &operator>>(std::istream &inp, BigInt &x)
+{
+    char ch;
+    if (!(inp >> ch))
+    {
+        return inp;
+    }
+    if (!(std::isdigit(ch) || ch == '+' || ch == '-'))
+    {
+        inp.putback(ch);
+        inp.setstate(std::ios_base::failbit);
+        return inp;
+    }
+
+    std::string s;
+    if (std::isdigit(ch))
+    {
+        s += ch;
+    }
+
+    while (inp.get(ch) && std::isdigit(ch))
+    {
+        s += ch;
+    }
+
+    x = BigInt(s);
+
+    return inp;
 }
