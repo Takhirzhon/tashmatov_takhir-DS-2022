@@ -169,3 +169,8 @@ inline bool operator>(const BigInt &x, const BigInt &y)
     }
     return x.mDigits.size() < y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits > y.mDigits);
 }
+
+inline bool operator>=(const BigInt &x, const BigInt &y)
+{
+    return !(y > x);
+}
