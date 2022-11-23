@@ -74,6 +74,13 @@ TEST_CASE("Constructor with  a string")
         REQUIRE_THROWS_AS(BigInt("+"), runtime_error);
         REQUIRE_THROWS_AS(BigInt("-"), runtime_error);
     }
+
+    SUBCASE("incorrect symbols")
+    {
+        REQUIRE_THROWS_AS(BigInt("123-1"), runtime_error);
+        REQUIRE_THROWS_AS(BigInt("123a123"), runtime_error);
+        REQUIRE_THROWS_AS(BigInt("123123b"), runtime_error);
+    }
 }
 
 TEST_CASE("Addition")
@@ -121,4 +128,35 @@ TEST_CASE("Addition")
     //     sout << (a) + (b);
     //     REQUIRE(sout.str() == "7");
     // }
+}
+
+TEST_CASE("equality tests")
+{
+    SUBCASE("positive and positive")
+    {
+        BigInt x("+123");
+        BigInt y("00000123");
+        REQUIRE(x == y);
+    }
+
+    SUBCASE("negative and positive")
+    {
+        BigInt x("-123");
+        BigInt y("00000123");
+        REQUIRE(x != = y);
+    }
+
+    SUBCASE("positive and negative")
+    {
+        BigInt x("-123");
+        BigInt y("+00000123");
+        REQUIRE(x != = y);
+    }
+
+    SUBCASE("negative and negative")
+    {
+        BigInt x("-123");
+        BigInt y("-00000123");
+        REQUIRE(x == y);
+    }
 }
