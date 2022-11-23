@@ -14,14 +14,6 @@ TEST_CASE("Default constructor")
     ostringstream sout;
     sout << x;
     REQUIRE(sout.str() == "0");
-
-    vector<BigInt> v(5);
-    for (const auto &e : v)
-    {
-        ostringstream sout2;
-        sout2 << e;
-        REQUIRE(sout2.str() == "0");
-    }
 }
 
 TEST_CASE("Constructor with  a string")
@@ -130,6 +122,17 @@ TEST_CASE("Addition")
     // }
 }
 
+TEST_CASE("constructor with long parametr")
+{
+    ostringstream sout;
+    for (int i = -1000; i <= 1000; i++)
+    {
+        BigInt x(i);
+        sout << x;
+        REQUIRE(sout.str() == to_string(i));
+        sout.str("");
+    }
+}
 TEST_CASE("equality tests")
 {
     SUBCASE("positive and positive")
@@ -170,7 +173,7 @@ TEST_CASE("equality tests")
 
 TEST_CASE("Comparison tests")
 {
-    SUBCASE("negative and positive")
+    SUBCASE("<")
     {
         REQUIRE(BigInt("-123") < BigInt("1"));
         REQUIRE(BigInt("-123") < BigInt("0"));
@@ -178,10 +181,6 @@ TEST_CASE("Comparison tests")
         REQUIRE_FALSE(BigInt("1") < BigInt("-123"));
         REQUIRE_FALSE(BigInt("0") < BigInt("-123"));
         REQUIRE_FALSE(BigInt("123") < BigInt("-123"));
-    }
-
-    SUBCASE("positive")
-    {
         REQUIRE(BigInt("909") < BigInt("981"));
         REQUIRE(BigInt("99") < BigInt("9999"));
     }
