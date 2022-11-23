@@ -24,28 +24,57 @@ TEST_CASE("Default constructor")
     }
 }
 
-// TEST_CASE("Constructor with  a string")
-// {
-//     ostringstream sout;
-//     SUBCASE("postive number")
-//     {
-//         BigInt x("123456789123456789");
-//         sout << x;
-//         REQUIRE(sout.str() == "123456789123456789");
-//     }
+TEST_CASE("Constructor with  a string")
+{
+    ostringstream sout;
 
-//     SUBCASE("negative number")
-//     {
-//         BigInt x("-123");
-//         sout << x;
-//         REQUIRE(sout.str() == "-123");
-//     }
+    SUBCASE("postive number")
+    {
+        BigInt x("123456789123456789");
+        sout << x;
+        REQUIRE(sout.str() == "123456789123456789");
+    }
 
-//     SUBCASE("empty string")
-//     {
-//         REQUIRE_THROWS_AS(BigInt(""), runtime_error);
-//     }
-// }
+    SUBCASE("negative number")
+    {
+        BigInt x("-123");
+        sout << x;
+        REQUIRE(sout.str() == "-123");
+
+        sout.str("");
+        BigInt y("+123");
+        sout << y;
+        REQUIRE(sout.str() == "123");
+
+        sout.str("");
+        BigInt z("-0");
+        sout << z;
+        REQUIRE(sout.str() == "-123");
+    }
+
+    SUBCASE("leading zeroes")
+    {
+        BigInt x("-0000123");
+        sout << x;
+        REQUIRE(sout.str() == "-123");
+
+        sout.str("");
+        BigInt y("+00000000");
+        sout << y;
+        REQUIRE(sout.str() == "0");
+    }
+
+    SUBCASE("empty string")
+    {
+        REQUIRE_THROWS_AS(BigInt(""), runtime_error);
+    }
+
+    SUBCASE("just sign")
+    {
+        REQUIRE_THROWS_AS(BigInt("+"), runtime_error);
+        REQUIRE_THROWS_AS(BigInt("-"), runtime_error);
+    }
+}
 
 TEST_CASE("Addition")
 {

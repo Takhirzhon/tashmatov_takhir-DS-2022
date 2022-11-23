@@ -24,13 +24,26 @@ public:
         : mIsNegative(false)
     {
         size_t i = 0;
-        if (s[i] == '-' || s[i] == '+')
+        if (!s.empty() && (s[i] == '-' || s[i] == '+'))
         {
             mIsNegative = s[i] == '-';
+            ++i;
+        }
+        while (i + 1 < s.size() && s[i] == '0')
+        {
+            ++i;
         }
         for (; i < s.size() && isdigit(s[i]); i++)
         {
             mDigits.push_back(s[i] - '0');
+        }
+        if (i < s.size() || mDigits.empty())
+        {
+            throw std::runtime_error("Bigint: incorrect string representation");
+        }
+        if (mDigits.size() == 1 && mDigits[0] == 0)
+        {
+            mIsNegative = false;
         }
     }
 
