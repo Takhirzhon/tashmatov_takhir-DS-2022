@@ -89,7 +89,7 @@ TEST_CASE("Addition")
     {
         BigInt a("-2");
         BigInt b("-5");
-        sout << a - b;
-        REQUIRE(sout.str() == "-7");
+        sout << (a) + (b);
+        REQUIRE(sout.str() == "7");
     }
 }

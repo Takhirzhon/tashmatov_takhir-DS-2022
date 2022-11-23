@@ -23,9 +23,14 @@ public:
     BigInt(const std::string &s)
         : mIsNegative(false)
     {
-        for (auto d : s)
+        size_t i = 0;
+        if (s[i] == '-' || s[i] == '+')
         {
-            mDigits.push_back(d - '0');
+            mIsNegative = s[i] == '-';
+        }
+        for (; i < s.size() && isdigit(s[i]); i++)
+        {
+            mDigits.push_back(s[i] - '0');
         }
     }
 
@@ -89,14 +94,19 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
         return BigInt::addAbsValues(x, y);
     }
 
+    if (x.mIsNegative && y.mIsNegative)
+    {
+        BigInt z;
+    }
+
     throw std::runtime_error("not implemented yet");
 }
 
-inline BigInt operator-(const BigInt &x, const BigInt &y)
-{
-    if (x.mIsNegative && y.mIsNegative)
-    {
-        return BigInt::addAbsValues(x, y);
-    }
-    throw std::runtime_error("not implemented yet");
-}
+// inline BigInt operator-(const BigInt &x, const BigInt &y)
+// {
+//     if (x.mIsNegative && y.mIsNegative)
+//     {
+//         return BigInt::addAbsValues(x, y);
+//     }
+//     throw std::runtime_error("not implemented yet");
+// }
