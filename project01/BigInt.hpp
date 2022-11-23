@@ -9,7 +9,8 @@ class BigInt
     friend std::ostream &operator<<(std::ostream &out, const BigInt &x);
     friend BigInt operator+(const BigInt &x, const BigInt &y);
     friend BigInt operator-(const BigInt &x, const BigInt &y);
-    friend BigInt operator==(const BigInt &x, const BigInt &y);
+    friend bool operator==(const BigInt &x, const BigInt &y);
+    friend bool operator!=(const BigInt &x, const BigInt &y);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -125,13 +126,7 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
 //     throw std::runtime_error("not implemented yet");
 // }
 
-inline BigInt operator==(const BigInt &x, const BigInt &y)
+inline bool operator==(const BigInt &x, const BigInt &y)
 {
-    if (x.mIsNegative != y.mIsNegative)
-    {
-        return false;
-    }
-    if (x.mDigits.size() != y.mDigits.size0)
-    {
-    }
+    return x.mIsNegative == y.mIsNegative & x.mDigits == y.mDigits;
 }
