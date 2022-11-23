@@ -143,14 +143,14 @@ TEST_CASE("equality tests")
     {
         BigInt x("-123");
         BigInt y("00000123");
-        REQUIRE(x != = y);
+        REQUIRE(x != y);
     }
 
     SUBCASE("positive and negative")
     {
         BigInt x("-123");
         BigInt y("+00000123");
-        REQUIRE(x != = y);
+        REQUIRE(x != y);
     }
 
     SUBCASE("negative and negative")

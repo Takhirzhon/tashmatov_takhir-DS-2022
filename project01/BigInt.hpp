@@ -128,5 +128,10 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
 
 inline bool operator==(const BigInt &x, const BigInt &y)
 {
-    return x.mIsNegative == y.mIsNegative & x.mDigits == y.mDigits;
+    return x.mIsNegative == y.mIsNegative && x.mDigits == y.mDigits;
+}
+
+inline bool operator!=(const BigInt &x, const BigInt &y)
+{
+    return !(x == y);
 }
