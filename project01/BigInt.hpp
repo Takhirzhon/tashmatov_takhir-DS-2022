@@ -89,6 +89,11 @@ public:
         }
         return z;
     }
+
+    BigInt(long long x)
+        : BigInt(std::to_string(x))
+    {
+        }
 };
 
 inline std::ostream &operator<<(std::ostream &out, const BigInt &x)
@@ -120,15 +125,6 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
     throw std::runtime_error("not implemented yet");
 }
 
-// inline BigInt operator-(const BigInt &x, const BigInt &y)
-// {
-//     if (x.mIsNegative && y.mIsNegative)
-//     {
-//         return BigInt::addAbsValues(x, y);
-//     }
-//     throw std::runtime_error("not implemented yet");
-// }
-
 inline bool operator==(const BigInt &x, const BigInt &y)
 {
     return x.mIsNegative == y.mIsNegative && x.mDigits == y.mDigits;
@@ -153,5 +149,5 @@ inline bool operator<(const BigInt &x, const BigInt &y)
     {
         return x.mDigits.size() < y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits < y.mDigits);
     }
-    assert(false);
+    return x.mDigits.size() > y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits < y.mDigits);
 }
