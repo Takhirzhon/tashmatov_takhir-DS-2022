@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <cassert>
+#include <stdexcept>
 
 class BigInt
 {
@@ -11,6 +13,7 @@ class BigInt
     friend BigInt operator-(const BigInt &x, const BigInt &y);
     friend bool operator==(const BigInt &x, const BigInt &y);
     friend bool operator!=(const BigInt &x, const BigInt &y);
+    friend bool operator<(const BigInt &x, const BigInt &y);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -134,4 +137,21 @@ inline bool operator==(const BigInt &x, const BigInt &y)
 inline bool operator!=(const BigInt &x, const BigInt &y)
 {
     return !(x == y);
+}
+
+inline bool operator<(const BigInt &x, const BigInt &y)
+{
+    if (x.mIsNegative && !y.mIsNegative)
+    {
+        return true;
+    }
+    if (!x.mIsNegative && y.mIsNegative)
+    {
+        return false;
+    }
+    if (!x.mIsNegative && !y.mIsNegative)
+    {
+        return x.mDigits.size() < y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits < y.mDigits);
+    }
+    assert(false);
 }

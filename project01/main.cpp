@@ -159,4 +159,30 @@ TEST_CASE("equality tests")
         BigInt y("-00000123");
         REQUIRE(x == y);
     }
+
+    SUBCASE("+0 and -0")
+    {
+        BigInt x("+000000000000");
+        BigInt y("-00000");
+        REQUIRE(x == y);
+    }
+}
+
+TEST_CASE("Comparison tests")
+{
+    SUBCASE("negative and positive")
+    {
+        REQUIRE(BigInt("-123") < BigInt("1"));
+        REQUIRE(BigInt("-123") < BigInt("0"));
+        REQUIRE(BigInt("-123") < BigInt("123"));
+        REQUIRE_FALSE(BigInt("1") < BigInt("-123"));
+        REQUIRE_FALSE(BigInt("0") < BigInt("-123"));
+        REQUIRE_FALSE(BigInt("123") < BigInt("-123"));
+    }
+
+    SUBCASE("positive")
+    {
+        REQUIRE(BigInt("909") < BigInt("981"));
+        REQUIRE(BigInt("99") < BigInt("9999"));
+    }
 }
