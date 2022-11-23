@@ -14,6 +14,7 @@ class BigInt
     friend bool operator==(const BigInt &x, const BigInt &y);
     friend bool operator!=(const BigInt &x, const BigInt &y);
     friend bool operator<(const BigInt &x, const BigInt &y);
+    friend bool operator>(const BigInt &x, const BigInt &y);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -93,7 +94,7 @@ public:
     BigInt(long long x)
         : BigInt(std::to_string(x))
     {
-        }
+    }
 };
 
 inline std::ostream &operator<<(std::ostream &out, const BigInt &x)
@@ -150,4 +151,21 @@ inline bool operator<(const BigInt &x, const BigInt &y)
         return x.mDigits.size() < y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits < y.mDigits);
     }
     return x.mDigits.size() > y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits < y.mDigits);
+}
+
+inline bool operator>(const BigInt &x, const BigInt &y)
+{
+    if (x.mIsNegative && !y.mIsNegative)
+    {
+        return false;
+    }
+    if (!x.mIsNegative && y.mIsNegative)
+    {
+        return true;
+    }
+    if (!x.mIsNegative && !y.mIsNegative)
+    {
+        return x.mDigits.size() > y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits > y.mDigits);
+    }
+    return x.mDigits.size() < y.mDigits.size() || (x.mDigits.size() == y.mDigits.size() && x.mDigits > y.mDigits);
 }

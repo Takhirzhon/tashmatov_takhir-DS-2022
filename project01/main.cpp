@@ -184,4 +184,16 @@ TEST_CASE("Comparison tests")
         REQUIRE(BigInt("909") < BigInt("981"));
         REQUIRE(BigInt("99") < BigInt("9999"));
     }
+
+    SUBCASE(">")
+    {
+        REQUIRE(BigInt("123") > BigInt("1"));
+        REQUIRE(BigInt("123") > BigInt("0"));
+        REQUIRE(BigInt("123") > BigInt("-123"));
+        REQUIRE_FALSE(BigInt("123456789") > BigInt("987654321"));
+        REQUIRE_FALSE(BigInt("-123156") > BigInt("-13"));
+        REQUIRE_FALSE(BigInt("-123") > BigInt("0"));
+        REQUIRE(BigInt("132456798") > BigInt("12312346"));
+        REQUIRE(BigInt("123456789") > BigInt("-123456789"));
+    }
 }
