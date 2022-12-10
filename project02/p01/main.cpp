@@ -16,8 +16,13 @@ int main()
         vector<int> array(n);
         for (int i = 0; i < n; i++)
         {
-            array[i] = n;
-            cout << array[i] << "\n";
+            cin >> array[i];
+            // cout << array[i] << "\n";
         }
+        sort(
+            array.begin(), array.end(), [&m](int a, int b)
+            {
+                // if(){}
+            });
     }
 }
