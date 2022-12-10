@@ -196,6 +196,118 @@ void p06()
     }
 }
 
+void p07()
+{
+    vector<Student> students = {
+        {"StudentD", 2.7},
+        {"StudentA", 4.0},
+        {"StudentX", 3.2},
+        {"StudentC", 4.0},
+        {"StudentK", 4.0},
+        {"StudentE", 2.0},
+        {"StudentR", 4.0},
+        {"StudentD", 2.7},
+        {"StudentA", 4.0},
+        {"StudentX", 3.2},
+        {"StudentC", 4.0},
+        {"StudentK", 4.0},
+        {"StudentE", 2.0},
+        {"StudentR", 4.0},
+        {"StudentR", 4.0},
+        {"StudentD", 2.7},
+        {"StudentA", 4.0},
+        {"StudentX", 3.2},
+        {"StudentC", 4.0},
+        {"StudentK", 4.0},
+        {"StudentE", 2.0},
+        {"StudentR", 4.0}};
+
+    cout << "--- regular sort by name ---" << endl;
+
+    sort(begin(students), end(students), [](const Student &s1, const Student &s2)
+         { return s1.mName < s2.mName; });
+
+    for (const auto &s : students)
+    {
+        cout << s.mName << ", " << s.mGpa << endl;
+    }
+
+    cout << "--- regular sort by GPA ---" << endl;
+
+    sort(begin(students), end(students), [](const Student &s1, const Student &s2)
+         { return s1.mGpa < s2.mGpa; });
+
+    for (const auto &s : students)
+    {
+        cout << s.mName << ", " << s.mGpa << endl;
+    }
+
+    cout << "--- stable sort by name ---" << endl;
+
+    stable_sort(begin(students), end(students), [](const Student &s1, const Student &s2)
+                { return s1.mName < s2.mName; });
+
+    for (const auto &s : students)
+    {
+        cout << s.mName << ", " << s.mGpa << endl;
+    }
+
+    cout << "--- stable sort by GPA ---" << endl;
+
+    stable_sort(begin(students), end(students), [](const Student &s1, const Student &s2)
+                { return s1.mGpa < s2.mGpa; });
+
+    for (const auto &s : students)
+    {
+        cout << s.mName << ", " << s.mGpa << endl;
+    }
+}
+
+void p08()
+{
+    vector<pair<string, double>> students;
+    string name;
+    double gpa;
+    while (cin >> name >> gpa)
+    {
+        students.emplace_back(name, gpa);
+    }
+
+    // sorting by name and Gpa
+    sort(begin(students), end(students));
+
+    cout << " - - - " << endl;
+    cout << fixed << showpoint << setprecision(2);
+    for (const auto &p : students)
+    {
+        cout << p.first << ", " << p.second << endl;
+    }
+}
+
+void p09()
+{
+    vector<tuple<string, int, double>> employes;
+    string name;
+    int age;
+    double salary;
+    while (cin >> name >> age >> salary)
+    {
+        employes.emplace_back(name, age, salary);
+    }
+
+    // sorting by age
+    sort(begin(employes), end(employes),
+         [](const auto &e1, const auto &e2)
+         { return get<1>(e1) < get<1>(e2); });
+
+    cout << " - - - " << endl;
+    cout << fixed << showpoint << setprecision(2);
+    for (const auto &e : employes)
+    {
+        cout << get<0>(e) << ", " << get<1>(e) << ", " << get<2>(e) << endl;
+    }
+}
+
 int main()
 {
     // p0101();
@@ -204,5 +316,8 @@ int main()
     // p0201();
     // p0202();
     // p06();
-    p03();
+    // p03();
+    // p07();
+    // p08();
+    p09();
 }
