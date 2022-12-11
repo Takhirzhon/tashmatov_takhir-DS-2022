@@ -21,11 +21,6 @@ struct Student
     }
 };
 
-// bool isEven(int n)
-// {
-//     return n % 2 == 0;
-// }
-
 // This is functor
 struct IsEven
 {
@@ -162,6 +157,115 @@ void p03()
     else
     {
         cout << *it << "No even numbers are found\n";
+    }
+}
+
+void p0401()
+{
+    vector<int> v;
+    for (int x; cin >> x;)
+    {
+        v.push_back(x);
+    }
+
+    auto p = min_element(begin(v), end(v));
+    if (p != end(v))
+    {
+        cout << "Min value: " << *p << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
+    }
+}
+void p0402()
+{
+    vector<int> v;
+    for (int x; cin >> x;)
+    {
+        v.push_back(x);
+    }
+
+    auto p = auMinElement(begin(v), end(v));
+    if (p != end(v))
+    {
+        cout << "Min value: " << *p << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
+    }
+}
+
+void p0501()
+{
+    vector<Student> students;
+    string name;
+    double gpa;
+    while (cin >> name >> gpa)
+    {
+        students.emplace_back(name, gpa);
+    }
+
+    auto iterToMinGpa = min_element(begin(students), end(students),
+                                    [](const Student &s1, const Student &s2)
+                                    { return s1.mGpa < s2.mGpa; });
+
+    if (iterToMinGpa != end(students))
+    {
+        cout << "with min gpa: " << iterToMinGpa->mName << " " << iterToMinGpa->mGpa << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
+    }
+
+    auto iterToMinName = min_element(begin(students), end(students),
+                                     [](const Student &s1, const Student &s2)
+                                     { return s1.mName < s2.mName; });
+    if (iterToMinName != end(students))
+    {
+        cout << "with min name: " << iterToMinName->mName << " " << iterToMinName->mGpa << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
+    }
+}
+void p0502()
+{
+
+    vector<Student> students;
+    string name;
+    double gpa;
+    while (cin >> name >> gpa)
+    {
+        students.emplace_back(name, gpa);
+    }
+
+    auto iterToMinGpa = auMinElement(begin(students), end(students),
+                                     [](const Student &s1, const Student &s2)
+                                     { return s1.mGpa < s2.mGpa; });
+
+    if (iterToMinGpa != end(students))
+    {
+        cout << "with min gpa: " << iterToMinGpa->mName << " " << iterToMinGpa->mGpa << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
+    }
+
+    auto iterToMinName = auMinElement(begin(students), end(students),
+                                      [](const Student &s1, const Student &s2)
+                                      { return s1.mName < s2.mName; });
+    if (iterToMinName != end(students))
+    {
+        cout << "with min name: " << iterToMinName->mName << " " << iterToMinName->mGpa << endl;
+    }
+    else
+    {
+        cout << "not found" << endl;
     }
 }
 
@@ -308,6 +412,68 @@ void p09()
     }
 }
 
+void p1001()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+
+    for (int x; cin >> x;)
+    {
+        cout << (binary_search(begin(v), end(v), x) ? "Yes\n" : "No\n");
+    }
+}
+void p1002()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+
+    for (int x; cin >> x;)
+    {
+        cout << (auBinarySearch(begin(v), end(v), x) ? "Yes\n" : "No\n");
+    }
+}
+
+void p11()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+
+    for (int x; cin >> x;)
+    {
+        auto it = lower_bound(begin(v), end(v), x);
+
+        if (it == end(v))
+        {
+            cout << "no elemnts equal or greater than " << x << endl;
+        }
+
+        else if (*it == x)
+        {
+            cout << "Firts element is equal to " << x << " has index: " << it - begin(v) << endl;
+        }
+        else
+        {
+            cout << "there are no elements equal to " << x << endl;
+            cout << "first element greater than " << x << " has index: " << it - begin(v) << endl;
+        }
+    }
+}
+
+void p12()
+{
+    vector<int> v = {0, 0, 4, 5, 10, 10, 10, 12, 20, 25, 35, 25, 40};
+
+    for (int x; cin >> x;)
+    {
+        auto p = equal_range(begin(v), end(v), x);
+        if (p.first == p.second)
+        {
+            cout << "There are no equal elements to " << x << endl;
+        }
+        else
+        {
+            cout << "number of elements equal to x is: " << p.second - p.first << endl;
+        }
+    }
+}
+
 int main()
 {
     // p0101();
@@ -317,7 +483,18 @@ int main()
     // p0202();
     // p06();
     // p03();
+    // p0401();
+    // p0402();
+
+    // p0501();
+    // p0502();
+
     // p07();
     // p08();
-    p09();
+    // p09();
+
+    // p1001();
+    // p1002();
+    // p11();
+    // p12();
 }
