@@ -12,19 +12,12 @@ void auSwap(T &x, T &y)
 template <typename BidirectionalIter>
 void auReverse(BidirectionalIter beg, BidirectionalIter end)
 {
-    for (;;)
+    while (beg != end)
     {
+        end--;
         if (beg == end)
-        {
             break;
-        }
 
-        --end;
-
-        if (beg == end)
-        {
-            break;
-        }
         auSwap(*beg, *end);
 
         ++beg;
@@ -34,92 +27,94 @@ void auReverse(BidirectionalIter beg, BidirectionalIter end)
 template <typename ForwardIter, typename Key>
 ForwardIter auFind(ForwardIter beg, ForwardIter end, const Key &key)
 {
-    for (; beg != end; ++beg)
+    while (beg != end)
     {
         if (*beg == key)
         {
             return beg;
         }
+
+        beg++;
     }
 
     return beg;
 }
 
-template <typename ForwardIter, typename UnirayPredicates>
-ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnirayPredicates pred)
+template <typename ForwardIter, typename UnaryPredicate>
+ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pred)
 {
-    for (; beg != end; ++beg)
+    while (beg != end)
     {
         if (pred(*beg))
         {
             return beg;
         }
+
+        beg++;
     }
 
     return beg;
 }
 
-template <typename Iter>
-Iter auMinElement(Iter beg, Iter end)
+template <typename ForwardIt>
+ForwardIt auMinElement(ForwardIt beg, ForwardIt end)
 {
-    if (beg == end)
-    {
-        return end;
-    }
-
-    Iter res = beg++;
+    ForwardIt min = beg;
     while (beg != end)
     {
-        if (*beg < *res)
+        if (*min > *beg)
         {
-            res = beg;
+            min = beg;
         }
+
         beg++;
     }
-    return res;
+
+    return min;
 }
 
-template <typename Iter, typename Predicate>
-Iter auMinElement(Iter beg, Iter end, Predicate p)
+template <typename ForwardIt, typename Compare>
+ForwardIt auMinElement(ForwardIt beg, ForwardIt end, Compare comp)
 {
-    if (beg == end)
-    {
-        return end;
-    }
-
-    Iter res = beg++;
+    ForwardIt min = beg;
     while (beg != end)
     {
-        if (p(*beg, *res))
+        if (comp(*beg, *min))
         {
-            res = beg;
+            min = beg;
         }
+
         beg++;
     }
-    return res;
+
+    return min;
 }
 
-template <typename Iter, typename T>
-Iter auLowerBounded(Iter beg, Iter end, const T &k)
+template <class ForwardIt, class T>
+bool auBinarySearch(ForwardIt beg, ForwardIt end, const T &value)
 {
     while (beg != end)
     {
-        auto mid = beg + (end - beg) / 2;
-        if (*mid < k)
+        
+        ForwardIt middle = beg;
+        advance(middle, (end - beg) / 2);
+
+        if (value > *middle)
         {
-            beg = ++mid;
+            beg = middle;
+        }
+        else if (value < *middle)
+        {
+            end = middle;
         }
         else
         {
-            end = mid;
+            return true;
         }
-    }
-    return beg;
-}
 
-template <typename Iter, typename T>
-bool auBinarySearch(Iter beg, Iter end, const T &k)
-{
-    auto iter = auLowerBounded(beg, end, k);
-    return iter != end && *iter == k;
+        if (end - beg == 1 && (value != *beg && value != *end))
+            break;
+    }
+
+    return false;
 }

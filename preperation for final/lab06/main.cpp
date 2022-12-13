@@ -312,9 +312,108 @@ void p07()
     }
 }
 
+void p08()
+{
+    vector<pair<string, double>> students;
+    string name;
+    double gpa;
+    while (cin >> name >> gpa)
+    {
+        students.emplace_back(name, gpa);
+    }
+
+    sort(begin(students), end(students));
+
+    cout << fixed << showpoint << setprecision(2);
+    for (const auto &p : students)
+    {
+        cout << p.first << " " << p.second << endl;
+    }
+}
+
+void p09()
+{
+    vector<tuple<string, int, double>> employes;
+    string name;
+    int age;
+    double salary;
+
+    while (cin >> name >> age >> salary)
+    {
+        employes.emplace_back(name, age, salary);
+    }
+
+    sort(begin(employes), end(employes), [](const auto &e1, const auto &e2)
+         { return get<1>(e1) < get<1>(e2); });
+
+    cout << "- - - Sorted - - - " << endl;
+    cout << fixed << setprecision(2);
+    for (const auto &e : employes)
+    {
+        cout << get<0>(e) << " " << get<1>(e) << " " << get<2>(e) << endl;
+    }
+}
+
+void p1001()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+    int x;
+    while (cin >> x)
+    {
+        cout << (binary_search(begin(v), end(v), x) ? "Yes\n" : "not found\n");
+    }
+}
+void p1002()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+
+    int x;
+    while (cin >> x)
+    {
+        cout << (auBinarySearch(begin(v), end(v), x) ? "yes\n" : "NO\n");
+    }
+}
+
+void p11()
+{
+    vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
+    for (int x; cin >> x;)
+    {
+        auto it = lower_bound(begin(v), end(v), x);
+
+        if (it == end(v))
+        {
+            cout << "no such elements " << x << endl;
+        }
+
+        else if (*it == x)
+        {
+            cout << x << " of element index is equal to " << it - begin(v) << endl;
+        }
+        else
+        {
+            cout << "no such element as " << x << endl;
+            cout << "First element is greater than " << x << " has index " << it - begin(v) << endl;
+        }
+    }
+}
+
+void p12()
+{
+    vector<int> v = {0, 0, 4, 5, 10, 10, 10, 12, 20, 25, 35, 25, 25, 40};
+
+    sort(begin(v), end(v));
+    for (int x; cin >> x;)
+    {
+        auto it = equal_range(begin(v), end(v), x);
+        cout << " Number of occurence is " << it.second - it.first << endl;
+    }
+}
+
 int main()
 {
     // p0101();
+
     // p0102();
     // p0201();
     // p0202();
@@ -323,4 +422,10 @@ int main()
     // p05();
     // p06();
     // p07();
+    // p08();
+    // p09();
+    // p1001();
+    // p1002();
+    // p11();
+    p12();
 }

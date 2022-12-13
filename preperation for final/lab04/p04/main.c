@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void printArray(int *beg, int *end);
 void reverse(int *beg, int *end);
+void printArray(int *beg, int *end);
 
 int main()
 {
-    printf("Size of Array: ");
+    printf("Enter size of Array: ");
     int n;
     scanf("%d", &n);
 
-    int *dinArray = (int *)malloc(n * sizeof(int));
+    int *dinArray = (int *)malloc(sizeof(int) * n);
     if (dinArray == NULL)
     {
-        printf("Not enough memory");
+        printf("Error, not enough memory\n");
         exit(1);
     }
 
@@ -22,10 +22,8 @@ int main()
         scanf("%d", &dinArray[i]);
     }
 
-    reverse(dinArray, n + dinArray);
-
-    printArray(dinArray, n + dinArray);
-
+    reverse(dinArray, dinArray + n);
+    printArray(dinArray, dinArray + n);
     free(dinArray);
 }
 
@@ -40,16 +38,10 @@ void printArray(int *beg, int *end)
 
 void reverse(int *beg, int *end)
 {
-    for (;;)
+    while (beg != end)
     {
-        if (beg == end)
-        {
-            break;
-        }
-
-        end--;
-
-        if (beg == end)
+        --end;
+        if (*beg == *end)
         {
             break;
         }

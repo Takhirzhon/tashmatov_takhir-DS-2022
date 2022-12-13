@@ -66,3 +66,33 @@ Iter auMinElement(Iter beg, Iter end, Predicator pred)
     }
     return res;
 }
+
+template <typename ForwardIter, class T>
+bool auBinarySearch(ForwardIter beg, ForwardIter end, T &value)
+{
+    while (beg != end)
+    {
+
+        ForwardIter middle = beg;
+        advance(middle, (end - beg) / 2);
+
+        if (value > *middle)
+        {
+            beg = middle;
+        }
+        else if (value < *middle)
+        {
+            end = middle;
+        }
+        else
+        {
+            return true;
+        }
+
+        if (end - beg == 1 && (value != *end && value != *beg))
+        {
+            break;
+        }
+    }
+    return false;
+}
