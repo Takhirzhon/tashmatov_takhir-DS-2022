@@ -1,8 +1,7 @@
-#include "../../au/algol.hpp"
-
 #include "VecInt.hpp"
-#include <iostream>
 #include <stdexcept>
+
+#include "/home/tashmatov_t/tashmatov_takhir-DS-2022-2/preperation for final/au/algol.hpp"
 
 using namespace std;
 
@@ -11,6 +10,7 @@ void p02();
 void printVecInt(const VecInt &v);
 
 int main()
+
 try
 {
     p01();
@@ -18,47 +18,43 @@ try
 }
 catch (const std::exception &e)
 {
-    std::cerr << e.what() << '\n';
+    std::cerr << e.what() << endl;
 }
 
 void p01()
 {
-    cout << "size of array: ";
+    cout << "Enter arrau's size ";
 
-    int n;
-    cin >> n;
+    int x;
+    cin >> x;
 
-    VecInt v(n);
+    VecInt v(x);
 
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < x; i++)
     {
         cin >> v[i];
     }
 
-    auReverse(v.begin(), v.end());
-
+    auReverce(v.begin(), v.end());
     printVecInt(v);
 }
 
 void p02()
 {
-    cout << "enter integer numbers:" << endl;
-
+    cout << " Enter Numbers: " << endl;
     VecInt v;
     for (int x; cin >> x;)
     {
         v.pushBack(x);
     }
-
     printVecInt(v);
-    auReverse(v.begin(), v.end());
+    auReverce(v.begin(), v.end());
     printVecInt(v);
 }
 
 void printVecInt(const VecInt &v)
 {
-
-    for (size_t i = 0; i < v.size(); ++i)
+    for (size_t i = 0; i < v.size(); i++)
     {
         cout << v[i] << " ";
     }

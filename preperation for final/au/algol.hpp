@@ -1,6 +1,14 @@
 #pragma once
 #include <utility>
 
+template <typename T>
+void auSwap(T &x, T &y)
+{
+    T t = std::move(x);
+    x = std::move(y);
+    y = std::move(t);
+}
+
 template <typename ForwardIter, typename Iter>
 ForwardIter auFind(ForwardIter beg, ForwardIter end, const Iter &key)
 {
@@ -95,4 +103,21 @@ bool auBinarySearch(ForwardIter beg, ForwardIter end, T &value)
         }
     }
     return false;
+}
+
+template <typename Bidir>
+void auReverce(Bidir beg, Bidir end)
+{
+    while (beg != end)
+    {
+        --end;
+
+        if (beg == end)
+        {
+            break;
+        }
+
+        auSwap(*beg, *end);
+        beg++;
+    }
 }
