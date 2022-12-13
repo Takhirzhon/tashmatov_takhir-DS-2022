@@ -1,34 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 10
 
-int main(void)
+int main()
 {
     int a[N];
 
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; i++)
     {
         scanf("%d", &a[i]);
     }
 
-    printf("Array values:\n");
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; i++)
     {
         printf("%d ", a[i]);
     }
     printf("\n");
 
     int sum = 0;
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; i++)
     {
         sum += a[i];
     }
-    printf("Sum of elements: %d\n", sum);
+    printf("sum of all elements: %d\n", sum);
 
     int sum2 = 0;
-    for (int *p = a; p != (a + N); ++p)
+    for (int *p = a; p != N + a; p++)
     {
         sum2 += *p;
     }
-    printf("Sum of elements: %d\n", sum2);
+    printf("Second sum: %d\n", sum2);
 }
