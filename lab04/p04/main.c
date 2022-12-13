@@ -39,16 +39,6 @@ void printArray(int *beg, int *end)
     printf("\n");
 }
 
-// pointer operations
-// *p
-// p->member
-// p == q
-// p != q
-// the following operations only for arrays
-// p++, ++p --q, q--
-// p + n, p - n, p += n, p -= n
-// p < q, q > p, p <= q, p >= q
-
 void reverse(int *beg, int *end)
 {
     for (;;)

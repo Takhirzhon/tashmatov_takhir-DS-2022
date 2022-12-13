@@ -21,10 +21,6 @@ int main(void)
 
 void readArray(int *p, int n)
 {
-    // for (int i = 0; i < n; ++i)
-    // {
-    //     scanf("%d", &p[i]);
-    // }
 
     while (n--)
     {
@@ -34,16 +30,6 @@ void readArray(int *p, int n)
 
 void printArray(int *beg, int *end)
 {
-    // for (int i = 0; i < n; ++i)
-    // {
-    //     printf(" %d", p[i]);
-    // }
-
-    // int *end = p + n;
-    // for (; p != end; ++p)
-    // {
-    //     printf(" %d", *p)
-    // }
 
     while (beg != end)
     {

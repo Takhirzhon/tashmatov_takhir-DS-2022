@@ -6,7 +6,6 @@ void reverse(int *beg, int *end);
 
 int main(void)
 {
-    // vector<int> v;
     int *data = NULL;
     size_t sz = 0;
     size_t cp = 0;
@@ -15,7 +14,6 @@ int main(void)
     int x;
     while (scanf("%d", &x) == 1)
     {
-        // v.push_back(x)
         if (sz == cp)
         {
             cp = (cp == 0) ? 1 : 2 * cp;
