@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define N 10
 
@@ -23,12 +22,12 @@ int main()
     {
         sum += a[i];
     }
-    printf("sum of all elements: %d\n", sum);
+    printf("Sum is %d\n", sum);
 
     int sum2 = 0;
     for (int *p = a; p != N + a; p++)
     {
         sum2 += *p;
     }
-    printf("Second sum: %d\n", sum2);
+    printf("Sum of elements: %d\n", sum2);
 }
