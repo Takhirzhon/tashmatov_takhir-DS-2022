@@ -21,26 +21,29 @@ int main()
         }
         sort(array.begin(), array.end(), [&n, &m](int a, int b)
              {
-                if (a % m < b % m)
-                {
-                    return true;
-                }
-                else if (a % m > b % m) {
-                    return false;
-                }
+            if (a % m < b % m)
+            {
+                return true;
+            }
 
-                if (a % 2 == 1 && b % 2 == 0) {
-                    return true;
-                } 
-                 else if (a % 2 == 0 && b % 2 == 1) {
-                        return false;
-                 } 
-                if ( a % 2== 1 && b % 2 == 1)
-                {
-                    return a > b;}
-                if ( a % 2 == 0 && b % 2 == 0) {
+            else
+            {
+            if (abs(a) % 2 == 0 && (b) % 2 == 0)
+            {
+                return true;
+            }
+            
+            else if (abs(a) % 2 == 1 && abs(b) % 2 == 1)
+            {
+                return a > b;
+            }
+            else if (abs(a) % 2 == 0 && abs(b) % 2 == 0)
+            {
                 return b > a;
-                } });
+            }
+            else {
+                return false;
+            } } });
 
         cout << n << " " << m << endl;
 
