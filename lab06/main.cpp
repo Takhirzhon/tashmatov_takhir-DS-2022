@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-#include "/home/tashmatov_t/tashmatov_takhir-DS-2022-2/preperation for final/au/algol.hpp"
+#include "/home/tashmatov_t/tashmatov_takhir-DS-2022-2/au/algol.hpp"
 
 using namespace std;
 
