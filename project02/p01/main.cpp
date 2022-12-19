@@ -49,5 +49,4 @@ int main()
             cout << x << endl;
         }
     }
-    cin >> n >> m;
 }
