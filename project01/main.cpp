@@ -79,13 +79,13 @@ TEST_CASE("Addition")
 {
     ostringstream sout;
 
-    // SUBCASE("positive + positive, test#1")
-    // {
-    //     BigInt x("193");
-    //     BigInt y("59");
-    //     sout << x + y;
-    //     REQUIRE(sout.str() == "252");
-    // }
+    SUBCASE("positive + positive, test#1")
+    {
+        BigInt x("193");
+        BigInt y("59");
+        sout << x + y;
+        REQUIRE(sout.str() == "252");
+    }
 
     // SUBCASE("positive + positive, test#2")
     // {
@@ -102,24 +102,90 @@ TEST_CASE("Addition")
     //     }
     // }
 
-    // SUBCASE("positive + negative")
-    // {
-    //     BigInt x("999");
-    //     BigInt y("-5");
-    //     sout << x + y;
-    //     REQUIRE(sout.str() == "1000");
-    // }
+    SUBCASE("positive + negative")
+    {
+        BigInt x("999");
+        BigInt y("-5");
+        sout << x + y;
+        REQUIRE("994");
+    }
 
     SUBCASE("negative + positive")
     {
     }
-    // SUBCASE("negative + negative")
-    // {
-    //     BigInt a("-2");
-    //     BigInt b("-5");
-    //     sout << (a) + (b);
-    //     REQUIRE(sout.str() == "7");
-    // }
+    SUBCASE("negative + negative")
+    {
+        BigInt a("-2");
+        BigInt b("-5");
+        sout << (a) + (b);
+        REQUIRE(sout.str() == "-7");
+    }
+}
+
+TEST_CASE("Substraction")
+{
+    SUBCASE("positive - negative")
+    {
+        BigInt x1(3);
+        BigInt y1(-2);
+        REQUIRE(x1 - y1 == 5);
+
+        for (int x2 = 0; x2 <= 100; ++x2)
+        {
+            for (int y2 = -100; y2 < 0; ++y2)
+            {
+                BigInt a(x2);
+                BigInt b(y2);
+                REQUIRE(a - b == x2 - y2);
+            }
+        }
+    }
+
+    SUBCASE("negative - positive")
+    {
+        BigInt x1(-3);
+        BigInt y1(2);
+        REQUIRE(x1 - y1 == -5);
+        for (int x2 = -100; x2 < 0; ++x2)
+        {
+            for (int y2 = 0; y2 <= 100; ++y2)
+            {
+                BigInt a(x2);
+                BigInt b(y2);
+                REQUIRE(a - b == x2 - y2);
+            }
+        }
+    }
+
+    SUBCASE("positive - positive")
+    {
+        BigInt x1(1024);
+        BigInt y1(526);
+        REQUIRE(x1 - y1 == 1024 - 526);
+
+        BigInt x2(5657);
+        BigInt y2(767);
+        REQUIRE(x2 - y2 == 5657 - 767);
+
+        BigInt x3(1000);
+        BigInt y3(1);
+        REQUIRE(x3 - y3 == 999);
+
+        BigInt x4(526);
+        BigInt y4(1024);
+        REQUIRE(x4 - y4 == (-498));
+    }
+
+    SUBCASE("negative - negative")
+    {
+        BigInt x1(-1024);
+        BigInt y1(-526);
+        REQUIRE(x1 - y1 == (-498));
+
+        BigInt x2(-526);
+        BigInt y2(-1024);
+        REQUIRE(x2 - y2 == 498);
+    }
 }
 
 TEST_CASE("constructor with long parametr")
@@ -226,6 +292,14 @@ TEST_CASE("input operator")
 {
     ostringstream sout;
 
+    SUBCASE("correct input TEST #3")
+    {
+        istringstream sinp("123");
+        BigInt x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 123);
+    }
     SUBCASE("correct input TEST #1")
     {
         istringstream sinp("123x123");
@@ -233,6 +307,14 @@ TEST_CASE("input operator")
         sinp >> x;
         REQUIRE(sinp.good());
         REQUIRE(x == 123);
+    }
+    SUBCASE("correct input TEST #5")
+    {
+        istringstream sinp("+ 123");
+        BigInt x;
+        sinp >> x;
+        REQUIRE(sinp.fail());
+        REQUIRE(x == 0);
     }
 
     SUBCASE("correct input TEST #2")
