@@ -14,6 +14,7 @@ int main()
     while (cin >> n >> m)
     {
         vector<int> array(n);
+
         for (int i = 0; i < n; i++)
         {
             cin >> array[i];
@@ -40,6 +41,12 @@ int main()
                 if ( a % 2 == 0 && b % 2 == 0) {
                 return b > a;
                 } });
-    }
 
- }
+        cout << n << " " << m << endl;
+
+        for (int x : array)
+        {
+            cout << x << endl;
+        }
+    }
+}
