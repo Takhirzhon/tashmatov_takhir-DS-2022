@@ -231,7 +231,6 @@ inline std::istream &operator>>(std::istream &inp, BigInt &x)
     }
 
     x = BigInt(s);
-    x.mIsNegative = isNegetive;
 
     return inp;
 }

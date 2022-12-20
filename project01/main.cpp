@@ -162,30 +162,36 @@ TEST_CASE("Substraction")
         BigInt x1(1024);
         BigInt y1(526);
         REQUIRE(x1 - y1 == 1024 - 526);
-
-        BigInt x2(5657);
-        BigInt y2(767);
-        REQUIRE(x2 - y2 == 5657 - 767);
-
-        BigInt x3(1000);
-        BigInt y3(1);
-        REQUIRE(x3 - y3 == 999);
-
-        BigInt x4(526);
-        BigInt y4(1024);
-        REQUIRE(x4 - y4 == (-498));
     }
-
-    SUBCASE("negative - negative")
+    SUBCASE("zero - zero")
     {
-        BigInt x1(-1024);
-        BigInt y1(-526);
-        REQUIRE(x1 - y1 == (-498));
-
-        BigInt x2(-526);
-        BigInt y2(-1024);
-        REQUIRE(x2 - y2 == 498);
+        BigInt x1(0);
+        BigInt y1(0);
+        REQUIRE(x1 - y1 == 0);
     }
+    BigInt x2(5657);
+    BigInt y2(767);
+    REQUIRE(x2 - y2 == 5657 - 767);
+
+    BigInt x3(1000);
+    BigInt y3(1);
+    REQUIRE(x3 - y3 == 999);
+
+    BigInt x4(526);
+    BigInt y4(1024);
+    REQUIRE(x4 - y4 == (-498));
+
+
+SUBCASE("negative - negative")
+{
+    BigInt x1(-1024);
+    BigInt y1(-526);
+    REQUIRE(x1 - y1 == (-498));
+
+    BigInt x2(-526);
+    BigInt y2(-1024);
+    REQUIRE(x2 - y2 == 498);
+}
 }
 
 TEST_CASE("constructor with long parametr")
