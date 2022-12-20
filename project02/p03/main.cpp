@@ -17,7 +17,7 @@ int main()
     int X;
     cin >> X;
 
-    for (int i = 1; i <= X; i++)
+    for (int i = 0; i < X; i++)
     {
         int R, C, M, N;
         cin >> R >> C >> M >> N;
@@ -44,6 +44,11 @@ int main()
         sort(frequency.begin(), frequency.end(), [](Freq a, Freq b)
              { return a.count > b.count; });
 
+        int size = 0;
+        for (int j = 0; j < 26; j++)
+        {
+            size += frequency[j].count * ((j == 0) ? M : N);
+        }
 
         cout << "Case " << i << ": " << size << endl;
     }
