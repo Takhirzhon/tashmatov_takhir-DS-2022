@@ -3,73 +3,58 @@
 template <typename C>
 int sz(const C &c) { return static_cast<int>(c.size()); }
 
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <vector>
-#include <sstream>
-
 using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
-    for (int i = 0; i < t; ++i)
+    int test;
+    cin >> test;
+
+    for (int i = 0; i < test; ++i)
     {
-        vector<pair<string, unsigned long>> v;
+        vector<pair<string, string>> v;
         int n;
         cin >> n;
 
-        // read input
         for (int j = 0; j < n; ++j)
         {
             string name;
             cin >> name;
             name = name.substr(0, name.length() - 1);
-            string class_string;
-            cin >> class_string;
-            string throw_away; // "class"
+            string class_name;
+            cin >> class_name;
+            string throw_away;
             cin >> throw_away;
 
-            string class_value = ""; // Empty string to start with
-            istringstream ss(class_string);
-            string token;
-            while (getline(ss, token, '-'))
-            { // iterate through class
-                if (token == "upper")
+            string class_value = "";
+            istringstream ss(class_name);
+            string role;
+            while (getline(ss, role, '-'))
+            {
+                if (role == "upper")
                 {
                     class_value += '3';
                 }
-                else if (token == "middle")
+                else if (role == "middle")
                 {
                     class_value += '2';
                 }
-                else if (token == "lower")
+                else if (role == "lower")
                 {
                     class_value += '1';
                 }
             }
-            reverse(class_value.begin(), class_value.end()); // reverse string to get highest class value first
+            reverse(class_value.begin(), class_value.end());
             while (class_value.length() < 10)
             {
-                class_value += '2'; // pad with 2:s (middle class) if shorter than 10 classes
+                class_value += '2';
             }
 
-            // convert string to unsigned long
-            unsigned long value = 0;
-            for (char c : class_value)
-            {
-                value = 10 * value + (c - '0');
-            }
-
-            // add to vector
-            v.emplace_back(name, value);
+            v.emplace_back(name, class_value);
         }
 
-        // sort vector using stable_sort and a lambda function
         stable_sort(v.begin(), v.end(),
-                    [](const pair<string, unsigned long> &a, const pair<string, unsigned long> &b)
+                    [](const pair<string, string> &a, const pair<string, string> &b)
                     {
                         if (a.second != b.second)
                         {
@@ -84,10 +69,8 @@ int main()
         for (const auto &p : v)
         {
             const auto &name = p.first;
-            const auto &value = p.second;
             cout << name << endl;
         }
         cout << "==============================" << endl;
     }
-    return 0;
 }
