@@ -11,6 +11,7 @@ int main()
 
     int m, n;
     string word;
+    int salary = 0;
 
     vector<pair<string, int>> points;
     while (cin >> m >> n)
@@ -21,25 +22,24 @@ int main()
             cin >> word >> dollar;
             points.push_back({word, dollar});
         }
-
-        int salary = 0;
-        while (cin >> word, word != ".")
+        for (int i = 0; i < n; ++i)
         {
-            // Find the index of the pair object that contains the word
-            int index = -1;
-            for (int i = 0; i < sz(points); i++)
+            while (cin >> word, word != ".")
             {
-                if (points[i].first == word)
+                int index = -1;
+                for (int i = 0; i < sz(points); i++)
                 {
-                    index = i;
-                    break;
+                    if (points[i].first == word)
+                    {
+                        index = i;
+                        break;
+                    }
                 }
-            }
 
-            // If the word is found, add its value to the salary
-            if (index != -1)
-            {
-                salary += points[index].second;
+                if (index != -1)
+                {
+                    salary += points[index].second;
+                }
             }
             cout << salary << endl;
         }
