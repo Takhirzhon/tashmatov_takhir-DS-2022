@@ -5,12 +5,6 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-#include <iostream>
-#include <map>
-#include <string>
-#include <vector>
-#include <algorithm>
-
 struct Skill
 {
     string word;
