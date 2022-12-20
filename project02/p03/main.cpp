@@ -23,6 +23,7 @@ int main()
         cin >> R >> C >> M >> N;
 
         vector<Freq> frequency;
+
         for (int j = 0; j < 26; j++)
         {
             Freq eachFreq;
@@ -30,7 +31,6 @@ int main()
             eachFreq.count = 0;
             frequency.push_back(eachFreq);
         }
-
         for (int j = 0; j < R; j++)
         {
             string line;
@@ -41,13 +41,14 @@ int main()
             }
         }
 
-        stable_sort(frequency.begin(), frequency.end(), [](Freq a, Freq b)
-                    { return a.count > b.count; });
+        sort(frequency.begin(), frequency.end(), [](Freq a, Freq b)
+             { return a.count > b.count; });
 
         int size = 0;
+        int maxcount = frequency[0].count;
         for (int j = 0; j < 26; j++)
         {
-            size += frequency[j].count * ((j == 0) ? M : N);
+            size += frequency[j].count * ((frequency[j].count == maxcount) ? M : N);
         }
 
         cout << "Case " << i << ": " << size << endl;
