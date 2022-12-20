@@ -17,32 +17,40 @@ struct Pair
 
 int main()
 {
+    int tests = 0;
     string line;
     while (getline(cin, line))
     {
-        vector<Pair> frequencies;
+        if (tests++ > 0)
+        {
+            cout << endl;
+        }
+        vector<Pair> vec;
         for (char c : line)
         {
-            auto it = find_if(frequencies.begin(), frequencies.end(), [c](const Pair &p)
+            auto it = find_if(vec.begin(), vec.end(), [c](const Pair &p)
                               { return p.ascii == c; });
-            if (it == frequencies.end())
+            if (it == vec.end())
             {
-                frequencies.push_back({c, 1});
+                vec.push_back({c, 1});
             }
             else
             {
                 it->value++;
             }
         }
-        sort(frequencies.begin(), frequencies.end(), [](const Pair &a, const Pair &b)
-             { return a.value < b.value; });
+        sort(vec.begin(), vec.end(), [](const Pair &a, const Pair &b)
+             {
+                 if (a.value == b.value)
+                 {
+                     return a.ascii > b.ascii;
+                 }
+                 return a.value < b.value; });
 
-        for (const Pair &p : frequencies)
+        for (auto &p : vec)
         {
             cout << p.ascii << ' ' << p.value << '\n';
         }
-
-        cout << '\n';
     }
 
     return 0;
