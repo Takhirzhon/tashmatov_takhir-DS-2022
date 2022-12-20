@@ -5,43 +5,53 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+struct Skill
+{
+    string word;
+    int value;
+};
+
 int main()
 {
-    iostream::sync_with_stdio(false);
-
     int m, n;
-    string word;
-    int salary = 0;
+    cin >> m >> n;
 
-    vector<pair<string, int>> points;
-    while (cin >> m >> n)
+    vector<Skill> wordValues;
+    for (int i = 0; i < m; ++i)
     {
-        for (int i = 0; i < m; i++)
-        {
-            int dollar;
-            cin >> word >> dollar;
-            points.push_back({word, dollar});
-        }
-        for (int i = 0; i < n; ++i)
-        {
-            while (cin >> word, word != ".")
-            {
-                int index = -1;
-                for (int i = 0; i < sz(points); i++)
-                {
-                    if (points[i].first == word)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
+        string word;
+        int value;
+        cin >> word >> value;
+        wordValues.push_back({word, value});
+    }
 
-                if (index != -1)
+    sort(wordValues.begin(), wordValues.end(),
+         [](const Skill &a, const Skill &b)
+         { return a.value < b.value; });
+
+    for (int i = 0; i < n; ++i)
+    {
+        string word;
+        int salary = 0;
+        while (cin >> word, word != ".")
+        {
+            for (const Skill &pair : wordValues)
+            {
+                if (pair.word == word)
                 {
-                    salary += points[index].second;
+                    salary += pair.value;
+                    break;
                 }
             }
-            cout << salary << endl;
         }
+
+        cout << salary << endl;
     }
+    return 0;
 }
