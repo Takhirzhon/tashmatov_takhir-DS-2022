@@ -5,11 +5,6 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <vector>
-
 struct SpecialString
 {
     string str;
@@ -47,7 +42,7 @@ int main()
         }
 
         stable_sort(strings.begin(), strings.end(), [](const SpecialString &s1, const SpecialString &s2)
-                         { return s1.inversions < s2.inversions; });
+                    { return s1.inversions < s2.inversions; });
 
         for (const SpecialString &s : strings)
         {
