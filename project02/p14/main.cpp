@@ -28,11 +28,16 @@ int main()
             if(s1[0] != s2[0])
             {
                 return s1[0] < s2[0];
+            }
+            else
+            {
+                return s1[1] < s2[1];
             } });
 
         for (auto &c : students)
         {
             cout << c << endl;
         }
+        students.clear();
     }
 }
